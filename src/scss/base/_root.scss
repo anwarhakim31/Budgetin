@@ -1,0 +1,23 @@
+@use "../abstracts/index" as *;
+
+:root {
+  @each $color, $shades in $colors {
+    @each$shade,$value in $shades {
+      --clr-#{$color}-#{$shade}: #{$value};
+    }
+  }
+
+  @each $fontsize, $sizes in $type-scale {
+    @each $size, $values in $sizes {
+      --fs-#{$size}: #{$values};
+    }
+  }
+
+  @each $fontweight, $value in $type-weight {
+    --fw-#{$fontweight}: #{$value};
+  }
+
+  @each $clamp, $value in $tag {
+    --fs-#{$clamp}: #{$value};
+  }
+}

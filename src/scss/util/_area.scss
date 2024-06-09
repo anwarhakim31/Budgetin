@@ -1,0 +1,37 @@
+@use "../abstracts/index" as *;
+
+@each $padding, $value in $areas {
+  .px-#{$padding} {
+    padding-inline: #{$value};
+  }
+  .py-#{$padding} {
+    padding-block: #{$value};
+  }
+  .p-#{$padding} {
+    padding: #{$value};
+  }
+  .pt-#{$padding} {
+    padding-top: #{$value};
+  }
+  .pb-#{$padding} {
+    padding-bottom: #{$value};
+  }
+}
+
+@each $margin, $value in $areas {
+  .mx-#{$margin} {
+    margin-inline: #{$value};
+  }
+  .my-#{$margin} {
+    margin-block: #{$value};
+  }
+  .m-#{$margin} {
+    margin: #{$value};
+  }
+  .mt-#{$margin} {
+    margin-top: #{$value};
+  }
+  .mb-#{$margin} {
+    margin-bottom: #{$value};
+  }
+}

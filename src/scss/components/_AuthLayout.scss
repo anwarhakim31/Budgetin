@@ -1,0 +1,62 @@
+@use "../abstracts/index" as *;
+
+.authlayout {
+  @include flex(center, center, null);
+  width: 100%;
+  min-height: 100vh;
+
+  .login-form {
+    width: 100%;
+    max-width: 400px;
+    margin-inline: auto;
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 0px var(--clr-primary-800);
+
+    .google {
+      position: relative;
+      &:hover {
+        background: var(--clr-accent-700);
+      }
+
+      .google-logo {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 25%;
+      }
+    }
+
+    .or {
+      position: relative;
+      &::before {
+        content: "";
+        top: 55%;
+        position: absolute;
+        left: 0;
+        width: 45%;
+        height: 1px;
+        background: var(--clr-primary-800);
+      }
+      &::after {
+        content: "";
+        top: 55%;
+        position: absolute;
+        right: 0;
+        width: 45%;
+        height: 1px;
+        background: var(--clr-primary-800);
+      }
+    }
+
+    .input-auth {
+      margin-top: 0.5rem;
+      border: 1px solid var(--clr-primary-500);
+      border-radius: 0.5rem;
+      padding: 0.75rem 1rem;
+
+      &:focus-within {
+        outline: var(--clr-accent-700) solid 1px;
+      }
+    }
+  }
+}

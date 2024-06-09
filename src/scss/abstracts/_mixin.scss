@@ -1,0 +1,47 @@
+@use "./breakpoints" as *;
+
+@mixin flex($jc, $ai, $dir) {
+  display: flex;
+  justify-content: $jc;
+  align-items: $ai;
+  flex-direction: $dir;
+}
+
+@mixin break-up($point) {
+  @if map-has-key($breakpoints, $point) {
+    @media (min-width: map-get($breakpoints,$points)) {
+      @content;
+    }
+  }
+}
+
+@mixin break-down($point) {
+  @if map-has-key($breakpoints, $point) {
+    @media (max-width: map-get(breakpoints,$point)) {
+      @content;
+    }
+  }
+}
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+
+@mixin button() {
+  padding-inline: 1.25rem;
+  padding-block: 0.75rem;
+  background: #0f172a;
+  border-radius: 0.5rem;
+  color: white;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  display: block;
+  font-family: "Inter", sans-serif;
+  text-decoration: none;
+
+  &:hover {
+    background: var(--clr-accent-700);
+  }
+}

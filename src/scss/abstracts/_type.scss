@@ -1,0 +1,37 @@
+$s-1: 0.75rem;
+$s-2: 0.875rem;
+$s-3: 1rem;
+$s-4: 1.25rem;
+$s-5: 1.5rem;
+$s-6: 1.75rem;
+$s-7: 2.5rem;
+$s-8: 2.75rem;
+$s-9: 5rem;
+
+$type-scale: (
+  fs: (
+    1: $s-1,
+    2: $s-2,
+    3: $s-3,
+    4: $s-4,
+    5: $s-5,
+    6: $s-6,
+    7: $s-7,
+    8: $s-8,
+    9: $s-9,
+  ),
+);
+
+$tag: (
+  100: clamp(1rem, 0.1713rem + 3.5359vw, 3rem),
+  200: clamp(2rem, 0.7569rem + 5.3039vw, 5rem),
+  300: clamp(4rem, 2.3425rem + 7.0718vw, 8rem),
+);
+
+$type-weight: (
+  regular: 400,
+  medium: 500,
+  semibold: 600,
+  bold: 700,
+  extra: 900,
+);

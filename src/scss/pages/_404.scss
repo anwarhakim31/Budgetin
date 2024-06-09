@@ -1,0 +1,11 @@
+.not {
+  max-width: 32rem;
+  margin-inline: auto;
+}
+
+.clip {
+  background: url("./src/assets/images/background-text.jpeg");
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}

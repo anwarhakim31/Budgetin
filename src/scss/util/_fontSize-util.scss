@@ -1,0 +1,15 @@
+@use "../abstracts/index" as *;
+
+@each $fontsize, $scales in $type-scale {
+  @each $scale, $value in $scales {
+    .fs-#{$scale} {
+      font-size: #{$value};
+    }
+  }
+}
+
+@each $fontsize, $value in $tag {
+  .heading-#{$fontsize} {
+    font-size: #{$value};
+  }
+}

@@ -1,0 +1,61 @@
+@use "../abstracts/index" as *;
+
+.mx-auto {
+  margin-inline: auto;
+}
+
+.rounded-xl {
+  border-radius: 0.75rem;
+}
+
+.rounded-full {
+  border-radius: 100%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-center {
+  @include flex(center, center, null);
+}
+
+.flex-between {
+  @include flex(space-between, center, null);
+}
+
+.w-full {
+  width: 100%;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.gap {
+  gap: 1rem;
+}
+
+.gap2 {
+  gap: 2rem;
+}
+
+.border {
+  border: 1px;
+}
+
+.border-2 {
+  border: 2px;
+}
+
+.button {
+  @include button;
+}
