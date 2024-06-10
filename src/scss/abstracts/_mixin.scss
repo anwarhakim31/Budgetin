@@ -17,7 +17,7 @@
 
 @mixin break-down($point) {
   @if map-has-key($breakpoints, $point) {
-    @media (max-width: map-get(breakpoints,$point)) {
+    @media (max-width: map-get($breakpoints,$point)) {
       @content;
     }
   }

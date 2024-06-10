@@ -16,6 +16,12 @@
   .pb-#{$padding} {
     padding-bottom: #{$value};
   }
+  .pl-#{$padding} {
+    padding-left: #{$value};
+  }
+  .pr-#{$padding} {
+    padding-right: #{$value};
+  }
 }
 
 @each $margin, $value in $areas {
@@ -33,5 +39,11 @@
   }
   .mb-#{$margin} {
     margin-bottom: #{$value};
+  }
+  .ml-#{$margin} {
+    margin-left: #{$value};
+  }
+  .mr-#{$margin} {
+    margin-right: #{$value};
   }
 }

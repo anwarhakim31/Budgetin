@@ -7,12 +7,12 @@ const Input = (props) => {
     <input
       type={type}
       value={value}
-      className="input-auth"
+      className={`${id === "password" ? "inputPass" : ""} input-auth relative `}
       id={id}
       placeholder={placeholder}
-      name={name}
+      name={id}
       onChange={(e) => handleInputChange(e)}
-    ></input>
+    />
   );
 };
 

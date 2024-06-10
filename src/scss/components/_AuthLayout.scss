@@ -5,12 +5,21 @@
   width: 100%;
   min-height: 100vh;
 
-  .login-form {
+  .auth {
+    position: relative;
+    overflow: hidden;
     width: 100%;
     max-width: 400px;
+
+    padding-bottom: 90px;
     margin-inline: auto;
     border-radius: 0.75rem;
-    box-shadow: 0 1px 0px var(--clr-primary-800);
+    box-shadow: 0 1px 4px 0 var(--clr-primary-800);
+
+    @include break-down(sm) {
+      max-width: none;
+      box-shadow: none;
+    }
 
     .google {
       position: relative;
@@ -54,8 +63,42 @@
       border-radius: 0.5rem;
       padding: 0.75rem 1rem;
 
+      &.inputPass {
+        padding: 0.75rem 2.5rem 0.75rem 1rem;
+      }
+
       &:focus-within {
         outline: var(--clr-accent-700) solid 1px;
+        outline-offset: 0.75px;
+      }
+    }
+
+    .authnavigation {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      border-block: 1px solid var(--clr-primary-500);
+
+      @include break-down(sm) {
+        border-block: none;
+        bottom: 5%;
+      }
+    }
+    .notif {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      transform: translate(-50%, -100%);
+      font-weight: var(--fw-medium);
+    }
+    .eye {
+      position: absolute;
+      bottom: 35%;
+      right: 10px;
+      cursor: pointer;
+
+      &:hover {
+        color: var(--clr-accent-700);
       }
     }
   }

@@ -12,6 +12,10 @@
   border-radius: 100%;
 }
 
+.relative {
+  position: relative;
+}
+
 .text-center {
   text-align: center;
 }
@@ -54,6 +58,14 @@
 
 .border-2 {
   border: 2px;
+}
+
+.opacity-0 {
+  opacity: 0;
+}
+
+.opacity-1 {
+  opacity: 1;
 }
 
 .button {
