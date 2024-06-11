@@ -16,6 +16,8 @@ import "react-toastify/dist/ReactToastify.css";
 import RegisterPage from "./pages/register";
 import HomePage from "./pages/home";
 import DarkmodeProvider from "./context/Darkmode";
+import { ManageFragment } from "./components/fragments/ManageFragment";
+import { DashboardFragment } from "./components/fragments/DashboardFragment";
 
 const router = createBrowserRouter([
   {
@@ -31,8 +33,18 @@ const router = createBrowserRouter([
     element: <RegisterPage />,
   },
   {
-    path: "/dashboard",
-    element: <HomePage />,
+    path: "/",
+    element: <HomePage />, // Use HomePage as the main layout
+    children: [
+      {
+        path: "dashboard",
+        element: <DashboardFragment />, // Dashboard fragment
+      },
+      {
+        path: "manage",
+        element: <ManageFragment />, // Manage fragment
+      },
+    ],
   },
   {
     path: "*",

@@ -1,4 +1,4 @@
-import { icons } from "lucide-react";
+import { X } from "lucide-react";
 import React, { useEffect, useRef } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { FolderKanban } from "lucide-react";
@@ -10,12 +10,17 @@ const SideLayout = ({ isSidebar, setIsSideBar }) => {
   const { isDark } = useDarkMode();
   const sidebarRef = useRef();
 
+  const handleClickoutside = (e) => {
+    if (sidebarRef.current && !sidebarRef.current.contains(e.target)) {
+      setIsSideBar(false);
+    }
+  };
+
+  const handleCloseSide = () => {
+    setIsSideBar(false);
+  };
+
   useEffect(() => {
-    const handleClickoutside = (e) => {
-      if (sidebarRef.current && !sidebarRef.current.contains(e.target)) {
-        setIsSideBar(false);
-      }
-    };
     if (isSidebar) {
       document.addEventListener("click", handleClickoutside);
     } else {
@@ -29,7 +34,7 @@ const SideLayout = ({ isSidebar, setIsSideBar }) => {
     <aside
       className={`sidebar h-full ${isDark ? "bg-dark" : ""} ${
         isSidebar ? "sidebarActive" : ""
-      }  `}
+      } relative`}
       ref={sidebarRef}
     >
       <div className="p-4 w-full">
@@ -39,7 +44,10 @@ const SideLayout = ({ isSidebar, setIsSideBar }) => {
         <nav className="primary-navigation">
           <ul className="primary-list">
             <li className="list">
-              <NavLink to={"/dashboard"} className={""}>
+              <NavLink
+                to={"/dashboard"}
+                className={`${isDark ? "text-light" : ""}`}
+              >
                 <div className="icon">
                   <LayoutDashboard width={20} height={20} />
                 </div>
@@ -68,7 +76,8 @@ const SideLayout = ({ isSidebar, setIsSideBar }) => {
         </nav>
       </div>
       <small className="text-center fw-semibold  copy">
-        Copyright &copy; 2024 <span className="text-accent-700">Budgetin</span>.
+        Copyright &copy; 2024{" "}
+        <span className="text-accent-700">Budgetin. </span>
         Made with <span className="text-accent-600 ">❤</span> by{" "}
         <Link
           to={"https://github.com/anwarhakim31"}
@@ -78,6 +87,14 @@ const SideLayout = ({ isSidebar, setIsSideBar }) => {
           Anwar Hakim
         </Link>
       </small>
+      <button
+        className="sidebar-close"
+        aria-label="button close sidebar"
+        onClick={handleCloseSide}
+      >
+        {" "}
+        <X width={20} height={20} />{" "}
+      </button>
     </aside>
   );
 };

@@ -16,7 +16,7 @@
     @include flex(space-between, center, column);
     transition: all 0.3s ease-in-out;
 
-    @include break-down(md) {
+    @include break-down(lg) {
       position: fixed;
       top: 0;
       left: -300px;

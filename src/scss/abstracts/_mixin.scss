@@ -9,7 +9,7 @@
 
 @mixin break-up($point) {
   @if map-has-key($breakpoints, $point) {
-    @media (min-width: map-get($breakpoints,$points)) {
+    @media (min-width: map-get($breakpoints,$point)) {
       @content;
     }
   }
@@ -44,4 +44,13 @@
   &:hover {
     background: var(--clr-accent-700);
   }
+}
+
+@mixin button2() {
+  padding: 0.625rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--clr-primary-300);
+  color: var(--clr-neutral-100);
+  font-weight: 600;
+  cursor: pointer;
 }

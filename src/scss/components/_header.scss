@@ -14,17 +14,17 @@
     @include flex(space-between, center, null);
     gap: 1rem;
 
-    .toggle-sidebar {
-      display: none;
-      @include break-down(md) {
-        display: block;
+    .sidebar-toggle {
+      opacity: 0;
+      @include break-down(lg) {
+        opacity: 1;
       }
     }
 
     .darklight {
-      width: 40px;
-      height: 40px;
-      border-radius: 0.75rem;
+      width: 35px;
+      height: 35px;
+      border-radius: 0.5rem;
       border: 1px solid var(--clr-primary-400);
       background: var(--clr-neutral-100);
       color: var(--clr-primary-700);
@@ -32,8 +32,8 @@
     }
 
     .profile {
-      width: 40px;
-      height: 40px;
+      width: 37px;
+      height: 37px;
       border: 1px solid var(--clr-primary-800);
       border-radius: 100%;
       cursor: pointer;
@@ -68,7 +68,7 @@
         background: #f9fafb;
         position: absolute;
         top: -9px;
-
+        z-index: 99;
         right: 9px;
         transform: rotate(45deg);
       }
@@ -116,7 +116,7 @@
   transform: scale(1);
 }
 
-.show {
+.hidden {
   opacity: 0;
   pointer-events: none;
   transform: scale(0.95);

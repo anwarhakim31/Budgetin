@@ -25,8 +25,9 @@ $type-scale: (
 );
 
 $tag: (
-  100: clamp(1rem, 0.1713rem + 3.5359vw, 3rem),
-  200: clamp(2rem, 0.7569rem + 5.3039vw, 5rem),
+  50: clamp(0.75rem, 0.6464rem + 0.442vw, 1rem),
+  100: clamp(1.25rem, 1.1271rem + 1.5912vw, 2.2rem),
+  200: clamp(1.5rem, 1.5rem + 0vw, 1.5rem),
   300: clamp(4rem, 2.3425rem + 7.0718vw, 8rem),
 );
 

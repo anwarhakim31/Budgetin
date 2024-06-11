@@ -36,6 +36,7 @@ const Logout = forwardRef(
                 className="user-image"
                 alt="user image"
                 loading="lazy"
+                onError={(e) => e.target.src === userDefault}
               />
             </div>
           </div>
@@ -102,13 +103,20 @@ const Header = ({ isToken, isUsername, handleToggleSidebar }) => {
   };
 
   useEffect(() => {
-    isToken ? setImage(isToken.picture) : setImage(userDefault);
-    isToken ? setName(isToken.name) : setName(isUsername);
-    isToken ? setEmail(isToken.email) : setEmail("");
-  }, [isToken, isUsername, image]);
+    try {
+      const token = JSON.parse(localStorage.getItem("token"));
+      if (token) {
+        setImage(token.picture || userDefault);
+        setName(token.name || "User");
+        setEmail(token.email || "");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
 
   return (
-    <header className="p-4 header">
+    <header className="p-3 header">
       <div className="header-wrapper">
         <button
           aria-label="toggle-sidebar"
@@ -117,16 +125,20 @@ const Header = ({ isToken, isUsername, handleToggleSidebar }) => {
           } sidebar-toggle`}
           onClick={handleToggleSidebar}
         >
-          <AlignLeft />
+          <AlignLeft height={20} width={20} />
         </button>
-        <div className="flex-between gap">
+        <div className="flex-center gap">
           <button
             className={isDark ? "bg-dark darklight" : "darklight"}
             aria-label="toggle dark/light"
             onClick={handleToggleIsDark}
             title="Light/Dark"
           >
-            {!isDark ? <Sun /> : <MoonStar />}
+            {!isDark ? (
+              <Sun height={20} width={20} />
+            ) : (
+              <MoonStar height={20} width={20} />
+            )}
           </button>
           <div></div>
 
@@ -135,7 +147,7 @@ const Header = ({ isToken, isUsername, handleToggleSidebar }) => {
               src={image}
               className="user-image"
               alt="user image"
-              loading="lazy"
+              onError={(e) => e.target.src === userDefault}
             />
           </div>
           {isLogout && (
