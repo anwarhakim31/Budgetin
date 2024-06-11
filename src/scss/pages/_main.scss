@@ -1,0 +1,48 @@
+@use "../abstracts/index" as *;
+
+.dashboard-wrapper {
+  @include flex(center, center, null);
+  flex: 1;
+  position: relative;
+
+  .sidebar {
+    width: 200px;
+    background: #f9fafb;
+
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    box-shadow: 0 1px 8px var(--clr-primary-500);
+    z-index: 50;
+    @include flex(space-between, center, column);
+    transition: all 0.3s ease-in-out;
+
+    @include break-down(md) {
+      position: fixed;
+      top: 0;
+      left: -300px;
+      opacity: 0.5;
+
+      &.sidebarActive {
+        left: 0;
+        opacity: 1;
+      }
+    }
+
+    .copy {
+      margin-bottom: 2rem;
+    }
+  }
+
+  .main {
+    flex: 1;
+  }
+}
+
+.logo {
+  user-select: none;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}

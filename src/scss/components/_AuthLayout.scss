@@ -37,6 +37,14 @@
 
     .or {
       position: relative;
+
+      &.active1::before {
+        background: var(--clr-neutral-100);
+      }
+      &.active1::after {
+        background: var(--clr-neutral-100);
+      }
+
       &::before {
         content: "";
         top: 55%;

@@ -1,0 +1,123 @@
+@use "../abstracts/index" as *;
+
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: var(--clr-accent-700);
+  z-index: 10;
+  .header-wrapper {
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+    @include flex(space-between, center, null);
+    gap: 1rem;
+
+    .toggle-sidebar {
+      display: none;
+      @include break-down(md) {
+        display: block;
+      }
+    }
+
+    .darklight {
+      width: 40px;
+      height: 40px;
+      border-radius: 0.75rem;
+      border: 1px solid var(--clr-primary-400);
+      background: var(--clr-neutral-100);
+      color: var(--clr-primary-700);
+      cursor: pointer;
+    }
+
+    .profile {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--clr-primary-800);
+      border-radius: 100%;
+      cursor: pointer;
+      overflow: hidden;
+      .user-image {
+        width: 100%;
+        height: 100%;
+
+        margin: auto;
+        object-fit: cover;
+        object-position: center;
+      }
+    }
+    .logout {
+      position: absolute;
+      top: 100%;
+      right: 3%;
+      width: 100%;
+      max-width: 250px;
+      background: var(--clr-neutral-100);
+      padding-top: 0.5rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 2px 4px var(--clr-primary-800);
+      padding-bottom: 3rem;
+      z-index: 99;
+      transition: all 0.5s ease-in-out;
+
+      &::before {
+        content: "";
+        width: 25px;
+        height: 25px;
+        background: #f9fafb;
+        position: absolute;
+        top: -9px;
+
+        right: 9px;
+        transform: rotate(45deg);
+      }
+
+      .log-list {
+        padding-inline: 1rem;
+        padding-block: 0.5rem;
+        border-bottom: 1px solid var(--clr-primary-200);
+        background: #f9fafb;
+        gap: 0.5rem;
+
+        .username {
+          word-break: break-all;
+          text-transform: capitalize;
+        }
+
+        .email {
+          word-break: break-all;
+          margin-top: 5px;
+        }
+
+        &:nth-last-child(2) {
+          gap: 1.75rem;
+          padding-inline: 1rem;
+          padding-block: 0.75rem;
+          border-bottom-right-radius: 0.75rem;
+          border-bottom-left-radius: 0.75rem;
+          cursor: pointer;
+        }
+      }
+      .log-logo {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        user-select: none;
+      }
+    }
+  }
+}
+
+.show {
+  opacity: 1;
+  pointer-events: initial;
+  transform: scale(1);
+}
+
+.show {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.95);
+}

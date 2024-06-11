@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const useLoggedIn = () => {
   const [isToken, setIsToken] = useState(null);
   const [isUsername, setIsUsername] = useState(null);
+  const { pathname } = useLocation();
 
   const navigate = useNavigate();
 
@@ -13,7 +14,7 @@ export const useLoggedIn = () => {
     if (token || username) {
       setIsToken(token);
       setIsUsername(username);
-      navigate("/dashboard");
+      navigate(pathname);
     } else {
       navigate("/login");
     }

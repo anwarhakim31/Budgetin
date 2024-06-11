@@ -44,12 +44,20 @@
   min-height: 100vh;
 }
 
+.h-screen {
+  height: 100vh;
+}
+
+.h-full {
+  height: 100%;
+}
+
 .gap {
-  gap: 1rem;
+  gap: 0.5rem;
 }
 
 .gap2 {
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .border {

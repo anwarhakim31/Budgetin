@@ -1,0 +1,17 @@
+.bg-dark {
+  background: var(--clr-primary-800) !important;
+  color: var(--clr-neutral-100) !important;
+}
+
+.bg-dark2 {
+  background: var(--clr-primary-900) !important;
+  color: var(--clr-neutral-100) !important;
+}
+
+.text-light {
+  color: var(--clr-neutral-100) !important;
+
+  &:hover {
+    color: var(--clr-accent-700) !important;
+  }
+}

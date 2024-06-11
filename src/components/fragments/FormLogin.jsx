@@ -6,11 +6,15 @@ import { toast } from "react-toastify";
 import { getUser } from "../../services/auth.service";
 import { LoginValidate } from "../../services/validate.service";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import CryptoJS from "crypto-js";
+import { useDarkMode } from "../../context/Darkmode";
 
 const FormLogin = () => {
   const [login, setLogin] = useState({ username: "" });
   const [error, setError] = useState({ username: "", noMatch: "" });
   const navigate = useNavigate();
+  const { isDark } = useDarkMode();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -33,11 +37,13 @@ const FormLogin = () => {
         (user) => user.username === login.username
       );
 
+      console.log(isMatch);
+
       if (!usernameError) {
         if (isMatch) {
-          navigate("/dashboard");
           setError((prevState) => ({ ...prevState, noMatch: false }));
           localStorage.setItem("username", isMatch.username);
+          navigate("/dashboard");
         } else {
           setTimeout(() => {
             setError((prevState) => ({ ...prevState, noMatch: false }));
@@ -50,9 +56,23 @@ const FormLogin = () => {
   };
 
   const authlogin = useGoogleLogin({
-    onSuccess: (response) => {
-      localStorage.setItem("token", JSON.stringify(response.access_token));
-      navigate("/dashboard");
+    onSuccess: async (response) => {
+      try {
+        const userInfo = await axios.get(
+          `https://www.googleapis.com/oauth2/v3/userinfo`,
+          {
+            headers: {
+              Authorization: `Bearer ${response.access_token}`,
+            },
+          }
+        );
+
+        localStorage.setItem("token", JSON.stringify(userInfo.data));
+
+        navigate("/dashboard");
+      } catch (error) {
+        console.error("Error fetching user info:", error);
+      }
     },
     onError: (error) => {
       toast.error(error);
@@ -78,7 +98,13 @@ const FormLogin = () => {
           <span>Sign With Google</span>
         </div>
       </button>
-      <p className="or text-center my-3 text-primary-500">or</p>
+      <p
+        className={`${
+          isDark ? "text-light active1 active2" : "text-primary-500"
+        } or text-center my-3 `}
+      >
+        or
+      </p>
       <form onSubmit={handleLoginSubmit} className="">
         <InputForm
           name={"Username"}

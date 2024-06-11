@@ -10,10 +10,12 @@ import LoginPage from "./pages/login";
 import "./scss/index.scss";
 import NotFoundPage from "./pages/404";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import MainPage from "./pages/mains";
+import DashboardPage from "./pages/home";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RegisterPage from "./pages/register";
+import HomePage from "./pages/home";
+import DarkmodeProvider from "./context/Darkmode";
 
 const router = createBrowserRouter([
   {
@@ -30,7 +32,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <MainPage />,
+    element: <HomePage />,
   },
   {
     path: "*",
@@ -41,8 +43,10 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <GoogleOAuthProvider clientId="100063954341-ujtlj3h67lbv1u08bjng8b9e72b932p5.apps.googleusercontent.com">
-      <RouterProvider router={router} />
-      <ToastContainer pauseOnFocusLoss={false} autoClose={1000} />
+      <DarkmodeProvider>
+        <RouterProvider router={router} />
+        <ToastContainer pauseOnFocusLoss={false} autoClose={1000} />
+      </DarkmodeProvider>
     </GoogleOAuthProvider>
   </React.StrictMode>
 );
