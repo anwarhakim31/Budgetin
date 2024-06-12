@@ -25,7 +25,7 @@ const Logout = forwardRef(
     return (
       <div
         role="dialog"
-        className={`${isOpen ? "hidden" : "show"}  logout`}
+        className={`${isOpen ? "" : "show"}  logout`}
         ref={ref}
       >
         <div className="flex-between log-list">
@@ -103,17 +103,16 @@ const Header = ({ isToken, isUsername, handleToggleSidebar }) => {
   };
 
   useEffect(() => {
-    try {
-      const token = JSON.parse(localStorage.getItem("token"));
-      if (token) {
-        setImage(token.picture || userDefault);
-        setName(token.name || "User");
-        setEmail(token.email || "");
-      }
-    } catch (error) {
-      console.log(error);
+    if (isToken) {
+      setImage(isToken.picture);
+      setName(isToken.name);
+      setEmail(isToken.email);
+    } else if (isUsername) {
+      setImage(userDefault);
+      setName(isUsername || "");
+      setEmail("");
     }
-  }, []);
+  }, [isToken, isUsername]);
 
   return (
     <header className="p-3 header">

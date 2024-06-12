@@ -1,0 +1,126 @@
+@use "../abstracts/index" as *;
+
+.modal-backdrop-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0 0 0 /50%);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  z-index: 100;
+}
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  @include flex(center, center, null);
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+  transform: scale(0.95);
+
+  @include break-down(md) {
+    opacity: 0;
+
+    transform: translateY(100%);
+    @include flex(center, end, null);
+  }
+
+  &.modal-active {
+    opacity: 1;
+    transform: scale(1);
+    @include break-down(md) {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .modal {
+    width: 100%;
+    max-width: 450px;
+    border-radius: 0.75rem;
+    @include break-down(md) {
+      max-width: none;
+    }
+
+    background: var(--clr-neutral-100);
+    z-index: 1000;
+    padding: 1rem;
+
+    @include break-down(md) {
+      border-radius: 0.5rem;
+    }
+
+    .close-modal {
+      border: none;
+      padding: 0.25rem;
+      border-radius: 0.5rem;
+      background: var(--clr-primary-300);
+      cursor: pointer;
+      &:hover {
+        background: var(--clr-primary-200);
+      }
+      &:focus-within {
+        outline: var(--clr-primary-500) solid 2px;
+      }
+    }
+    .modal-content-wrapper {
+      min-height: 50vh;
+      overflow: hidden;
+      .modal-content {
+        overflow-y: auto;
+
+        input {
+          background: var(--clr-neutral-200);
+          outline: none;
+          border: 2px solid var(--clr-primary-500);
+          &:focus-within {
+            border: 2px solid var(--clr-accent-700);
+          }
+        }
+
+        .category-pick {
+          width: 100%;
+          height: 120px;
+          border-radius: 0.5rem;
+          border: 2px solid var(--clr-primary-500);
+          margin-top: 0.5rem;
+          background: var(--clr-neutral-200);
+          @include flex(center, center, null);
+          user-select: none;
+          cursor: pointer;
+          outline: none;
+          &:focus-within {
+            border: 2px solid var(--clr-accent-700);
+          }
+          &:focus {
+            border: 2px solid var(--clr-accent-700);
+          }
+
+          .pick {
+            margin: auto;
+            user-select: none;
+          }
+          .emoji {
+            font-size: 3.5rem;
+          }
+        }
+
+        .button-modal-manage {
+          @include flex(end, center, null);
+          margin-top: 0.1rem;
+          gap: 0.5rem;
+        }
+      }
+    }
+  }
+}
+
+.picker {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+}

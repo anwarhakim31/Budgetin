@@ -37,9 +37,8 @@ const FormLogin = () => {
         (user) => user.username === login.username
       );
 
-      console.log(isMatch);
-
       if (!usernameError) {
+        console.log(isMatch);
         if (isMatch) {
           setError((prevState) => ({ ...prevState, noMatch: false }));
           localStorage.setItem("username", isMatch.username);

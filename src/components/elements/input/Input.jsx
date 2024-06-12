@@ -9,7 +9,9 @@ const Input = (props) => {
     <input
       type={type}
       value={value}
-      className={`${id === "password" ? "inputPass" : ""} input-auth relative ${
+      className={`${
+        id === "password" ? "inputPass" : ""
+      } input-auth relative inputs ${
         isDark ? "bg-primary-700 text-neutral-100" : ""
       }`}
       id={id}

@@ -27,7 +27,7 @@ const HomePage = () => {
         className={`${isDark ? " bg-dark2 " : ""}dashboard-wrapper h-screen`}
       >
         <SideLayout isSidebar={isSidebar} setIsSideBar={setIsSideBar} />
-        <MainLayout />
+        <MainLayout isToken={isToken} isUsername={isUsername} />
       </div>
     </section>
   );

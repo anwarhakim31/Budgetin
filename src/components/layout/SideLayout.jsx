@@ -32,7 +32,7 @@ const SideLayout = ({ isSidebar, setIsSideBar }) => {
 
   return (
     <aside
-      className={`sidebar h-full ${isDark ? "bg-dark" : ""} ${
+      className={`sidebar  ${isDark ? "bg-dark" : ""} ${
         isSidebar ? "sidebarActive" : ""
       } relative`}
       ref={sidebarRef}

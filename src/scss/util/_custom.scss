@@ -79,3 +79,11 @@
 .button {
   @include button;
 }
+
+.block {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}

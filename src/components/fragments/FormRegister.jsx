@@ -66,7 +66,7 @@ const FormRegister = () => {
     );
 
     setError({ username: usernameError, password: passwordError });
-    console.log(usernameError);
+
     if (!usernameError && !passwordError) {
       await postUser(register);
       const timeout = setTimeout(() => {

@@ -18,6 +18,8 @@ import HomePage from "./pages/home";
 import DarkmodeProvider from "./context/Darkmode";
 import { ManageFragment } from "./components/fragments/ManageFragment";
 import { DashboardFragment } from "./components/fragments/DashboardFragment";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
 const router = createBrowserRouter([
   {
@@ -56,8 +58,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <GoogleOAuthProvider clientId="100063954341-ujtlj3h67lbv1u08bjng8b9e72b932p5.apps.googleusercontent.com">
       <DarkmodeProvider>
-        <RouterProvider router={router} />
-        <ToastContainer pauseOnFocusLoss={false} autoClose={1000} />
+        <Provider store={store}>
+          <RouterProvider router={router} />
+          <ToastContainer pauseOnFocusLoss={false} autoClose={1000} />
+        </Provider>
       </DarkmodeProvider>
     </GoogleOAuthProvider>
   </React.StrictMode>
