@@ -34,7 +34,7 @@ const SideLayout = ({ isSidebar, setIsSideBar }) => {
     <aside
       className={`sidebar  ${isDark ? "bg-dark" : ""} ${
         isSidebar ? "sidebarActive" : ""
-      } relative`}
+      } `}
       ref={sidebarRef}
     >
       <div className="p-4 w-full">

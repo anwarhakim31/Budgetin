@@ -38,7 +38,7 @@ const loadFromStorage = (name) => {
 
 const initialState = {
   category: [],
-  data: [],
+  budget: [],
 };
 
 const BudgetinSlice = createSlice({
@@ -58,11 +58,15 @@ const BudgetinSlice = createSlice({
       );
       SaveLocalStorage(state.category);
     },
+    addIncome: (state, action) => {
+      state.data.push(action.payload);
+    },
   },
 });
 
-export const { addCategory, deleteCategory, loaddedCategory } =
+export const { addCategory, deleteCategory, loaddedCategory, addIncome } =
   BudgetinSlice.actions;
 export default BudgetinSlice.reducer;
 
 export const selectedDataCategory = (state) => state.budgetin.category;
+export const selectedDataBudget = (state) => state.budgetin.budget;

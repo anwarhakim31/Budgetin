@@ -22,7 +22,7 @@ const ModalOverlay = ({ onClose, showModal, children }) => {
 
   return (
     <div
-      className={`${showModal ? "modal-active" : ""} modal-overlay modal2`}
+      className={`${showModal ? "modal-active" : ""} modal-overlay`}
       role="presentation"
       onClick={handleClose}
     >
@@ -34,7 +34,7 @@ const ModalOverlay = ({ onClose, showModal, children }) => {
   );
 };
 
-const Modal = ({ onClose, children }) => {
+const Modal2 = ({ onClose, children }) => {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
@@ -49,16 +49,16 @@ const Modal = ({ onClose, children }) => {
     <>
       {ReactDOM.createPortal(
         <BackdropOverlay onClose={onClose} />,
-        document.getElementById("root-modal")
+        document.getElementById("root-modal2")
       )}
       {ReactDOM.createPortal(
         <ModalOverlay showModal={showModal} onClose={onClose}>
           {children}
         </ModalOverlay>,
-        document.getElementById("root-modal")
+        document.getElementById("root-modal2")
       )}
     </>
   );
 };
 
-export default Modal;
+export default Modal2;

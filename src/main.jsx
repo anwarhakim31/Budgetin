@@ -16,8 +16,8 @@ import "react-toastify/dist/ReactToastify.css";
 import RegisterPage from "./pages/register";
 import HomePage from "./pages/home";
 import DarkmodeProvider from "./context/Darkmode";
-import { ManageFragment } from "./components/fragments/ManageFragment";
-import { DashboardFragment } from "./components/fragments/DashboardFragment";
+import { ManageFragment } from "./components/fragments/manage/ManageFragment";
+import { DashboardFragment } from "./components/fragments/mainDashboard/DashboardFragment";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 

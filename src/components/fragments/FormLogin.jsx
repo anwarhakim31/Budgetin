@@ -25,14 +25,14 @@ const FormLogin = () => {
     setError({ ...error, username: errorLogin });
   };
 
-  const handleLoginSubmit = async (e) => {
+  const handleLoginSubmit = (e) => {
     e.preventDefault();
 
     const usernameError = LoginValidate("username", login.username);
 
     setError((prevState) => ({ ...prevState, username: usernameError }));
 
-    await getUser((data) => {
+    getUser((data) => {
       const isMatch = data.data.find(
         (user) => user.username === login.username
       );

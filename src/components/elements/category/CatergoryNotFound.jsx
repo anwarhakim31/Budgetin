@@ -6,8 +6,8 @@ const CatergoryNotFound = () => {
 
   return (
     <div className="category-notfound">
-      <h3 className={isDark ? "text-light2" : ""}>Tidak Ada kategori.</h3>
-      <p>Silahkan tambahkan kategori baru.</p>
+      <h3 className={isDark ? "text-light2" : ""}>Category Notfound.</h3>
+      <p>Please Add New Category.</p>
     </div>
   );
 };

@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Modal from "../../elements/Modal";
 import { X } from "lucide-react";
-import InputForm from "../../elements/input";
 import pick from "../../../assets/images/pick.svg";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
@@ -10,30 +9,23 @@ import { useDarkMode } from "../../../context/Darkmode";
 import { useDispatch } from "react-redux";
 import { addCategory } from "../../../redux/slices/slice";
 import { toast } from "react-toastify";
-import { useLoggedIn } from "../../../hooks/useLoggedIn";
+import { useUsername } from "../../../hooks/useUsername";
 
-const ManageModal = ({ onClose, isToken, isUsername }) => {
+const ManageModal = ({ onClose }) => {
   const [isPicker, setIsPicker] = useState(false);
   const [isEmoji, setIsEmoji] = useState("");
   const [isName, setIsName] = useState("");
-  const [username, setUsername] = useState("");
+  // const [username, setUsername] = useState("");
   const { isDark } = useDarkMode();
   const inputRef = useRef(null);
   const iconRef = useRef(null);
   const emojiRef = useRef(null);
   const dispatch = useDispatch();
+  const { userData } = useUsername();
 
   const handleOpenPicker = () => {
     setIsPicker(true);
   };
-
-  useEffect(() => {
-    if (isToken) {
-      setUsername(isToken.email);
-    } else if (isUsername) {
-      setUsername(isUsername);
-    }
-  }, [isToken, isUsername]);
 
   const handlePickerOutside = (e) => {
     if (emojiRef.current && !emojiRef.current.contains(e.target)) {
@@ -69,9 +61,9 @@ const ManageModal = ({ onClose, isToken, isUsername }) => {
             dispatch(
               addCategory({
                 id: uuid(),
-                name: isName,
+                name: isName.toLowerCase().trim(),
                 icon: isEmoji,
-                user: username,
+                user: userData,
               })
             );
             onClose();
@@ -91,7 +83,7 @@ const ManageModal = ({ onClose, isToken, isUsername }) => {
   return (
     <Modal onClose={onClose}>
       <div className="flex-between">
-        <h3 className="fs-4 fw-semibold text-primary-700">
+        <h3 className="fs-3 fw-semibold text-primary-700">
           Create New Category
         </h3>
         <button
@@ -99,33 +91,35 @@ const ManageModal = ({ onClose, isToken, isUsername }) => {
           aria-label="back to section"
           onClick={onClose}
         >
-          <X height={20} width={20} className="text-primary-700" />
+          <X height={15} width={15} className="text-primary-700 " />
         </button>
       </div>
       <p className="fs-2 text-primary-500 mt">
-        Insert the details to create a new category.
+        Enter the details to create a new category.
       </p>
       <div className="modal-content-wrapper mt-5">
         <div className="modal-content">
           <div className="flex flex-col">
-            <label htmlFor="category" className="fw-medium text-primary-900">
+            <label
+              htmlFor="category"
+              className="fw-semibold fs-2 text-primary-900"
+            >
               Category Name
             </label>
             <input
               type="text"
               className="inputs"
-              placeholder="Enter your category name..."
               onChange={handleInputName}
               value={isName}
               maxLength={20}
               ref={inputRef}
             />
-            <span className="fs-2">
-              Insert the category name (Max:20 Characters).
+            <span className="fs-1">
+              Enter the category name (Max:20 Characters).
             </span>
           </div>
           <div className="flex flex-col mt-4">
-            <label htmlFor="" className="fw-medium text-primary-900">
+            <label htmlFor="" className="fw-semibold fs-2 text-primary-900">
               Category Icon
             </label>
             <button
@@ -153,7 +147,7 @@ const ManageModal = ({ onClose, isToken, isUsername }) => {
                 </p>
               </div>
             </button>
-            <span className="fs-2">Choose Category Icon.</span>
+            <span className="fs-1">Choose Category Icon.</span>
             <div className={`${isPicker ? "block" : "hidden"} picker`}>
               <div ref={emojiRef}>
                 <Picker
@@ -175,7 +169,7 @@ const ManageModal = ({ onClose, isToken, isUsername }) => {
             <button
               type="button"
               aria-label="cancel add category"
-              className="button bg-primary-400"
+              className="button bg-primary-400 fs-1"
               onClick={onClose}
             >
               cancel
@@ -184,7 +178,7 @@ const ManageModal = ({ onClose, isToken, isUsername }) => {
               onClick={handleAddCategory}
               type="submit"
               aria-label="add Category"
-              className="button"
+              className="button fs-1"
             >
               Add
             </button>
