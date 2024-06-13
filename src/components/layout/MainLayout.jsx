@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import ManageModal from "../fragments/manage/ManageModal";
 import { ManageFragment } from "../fragments/manage/ManageFragment";
 import IncomeModal from "../fragments/mainDashboard/IncomeModal";
-import { loaddedCategory } from "../../redux/slices/slice";
+import { loaddedBudget, loaddedCategory } from "../../redux/slices/slice";
 import { useUsername } from "../../hooks/useUsername";
 import { useDispatch } from "react-redux";
 
@@ -16,6 +16,10 @@ const MainLayout = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loaddedCategory(userData));
+  }, [userData]);
+
+  useEffect(() => {
+    dispatch(loaddedBudget(userData));
   }, [userData]);
 
   const handleOpenCategory = () => {

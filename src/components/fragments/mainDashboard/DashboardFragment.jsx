@@ -3,10 +3,15 @@ import { Plus, Minus } from "lucide-react";
 import { useUsername } from "../../../hooks/useUsername";
 import { useDarkMode } from "../../../context/Darkmode";
 import budgetLogo from "../../../assets/images/budget.png";
+import { useSelector } from "react-redux";
+import { selectedDataBudget } from "../../../redux/slices/slice";
+import { NotFoundBudget } from "../../elements/Budget/NotFoundBudget";
+import BudgetList from "../../elements/Budget/BudgetList";
 
 export const DashboardFragment = ({ handleOpenIncome }) => {
   const { usernames } = useUsername();
   const { isDark } = useDarkMode();
+  const dataBudget = useSelector(selectedDataBudget);
 
   return (
     <>
@@ -65,14 +70,13 @@ export const DashboardFragment = ({ handleOpenIncome }) => {
               </h1>
             </div>
             <div className="progress-content">
-              <div className="not-budget-wrapper relative">
-                <div className="budget-notfound">
-                  <h3 className={isDark ? "text-light2" : ""}>
-                    Budget Not Available.
-                  </h3>
-                  <p>Please Add Some Budget.</p>
-                </div>
-              </div>
+              {dataBudget.length === 0 ? (
+                <NotFoundBudget />
+              ) : (
+                dataBudget.map((data) => (
+                  <BudgetList key={data.id} data={data} />
+                ))
+              )}
             </div>
           </div>
         </div>

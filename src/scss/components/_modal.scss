@@ -59,7 +59,9 @@
     .close-modal {
       border: none;
       padding: 0.25rem;
-      border-radius: 0.5rem;
+      width: 25px;
+      height: 25px;
+      border-radius: 100%;
       background: var(--clr-primary-300);
       cursor: pointer;
       &:hover {

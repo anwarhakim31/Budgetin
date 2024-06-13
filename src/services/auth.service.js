@@ -22,6 +22,10 @@ export const postUser = async (data) => {
 
 export const getUser = async (callback) => {
   try {
+    toast.promise(axios.get(URL + "/users/ "), {
+      pending: "Process...",
+    });
+
     const res = await axios.get(URL + "/users/ ");
     callback(res);
   } catch (error) {

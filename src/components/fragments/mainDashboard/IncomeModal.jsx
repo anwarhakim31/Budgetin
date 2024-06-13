@@ -4,11 +4,7 @@ import { ChevronUp, Plus, SearchIcon, X } from "lucide-react";
 import { ChevronDown } from "lucide-react";
 import Modal2 from "../../elements/Modal2";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addIncome,
-  selectedDataBudget,
-  selectedDataCategory,
-} from "../../../redux/slices/slice";
+import { addIncome, selectedDataCategory } from "../../../redux/slices/slice";
 import { useUsername } from "../../../hooks/useUsername";
 import { v4 as uuid } from "uuid";
 
@@ -22,9 +18,9 @@ const IncomeModal = ({ onClose, handleOpenCategory }) => {
   const totalIncomeRef = useRef(null);
   const categoryRef = useRef(null);
   const { userData } = useUsername();
-  const dataBudget = useSelector(selectedDataBudget);
+
   const dispatch = useDispatch();
-  console.log(dataBudget);
+  const time = Date.now();
 
   const handleChooseCategory = () => {
     setIsDrop(!isDrop);
@@ -55,12 +51,22 @@ const IncomeModal = ({ onClose, handleOpenCategory }) => {
   }, [dataCategory]);
 
   const handleSubmit = () => {
-    if (totalIncome === "") {
-      return totalIncomeRef.focus();
-    } else if (isEmoji === "") {
-      return categoryRef.focus();
+    if (totalIncome === 0) {
+      return totalIncomeRef.current.focus();
+    } else if (isEmoji.name === "") {
+      return categoryRef.current.focus();
     }
-    dispatch(addIncome({ user: userData, id: uuid(), Income: totalIncome }));
+
+    dispatch(
+      addIncome({
+        user: userData,
+        id: uuid(),
+        income: parseFloat(totalIncome),
+        category: isEmoji,
+        description: isDecription,
+        time: time,
+      })
+    );
   };
 
   return (
@@ -107,6 +113,8 @@ const IncomeModal = ({ onClose, handleOpenCategory }) => {
               onChange={handleTotalInCome}
               value={totalIncome}
               ref={totalIncomeRef}
+              min="0"
+              step="0.01"
             />
             <span className="fs-1">Determine the amount of income</span>
           </div>
@@ -171,16 +179,20 @@ const IncomeModal = ({ onClose, handleOpenCategory }) => {
                       </span>
                     </div>
                   ) : (
-                    categorySearch.map((item) => (
-                      <div
-                        key={item.id}
-                        className="child"
-                        onClick={() => handleSelectEmoji(item.name, item.icon)}
-                      >
-                        <h3>{item.icon}</h3>
-                        <p className="fs-1">{item.name}</p>
-                      </div>
-                    ))
+                    [...categorySearch]
+                      .sort((a, b) => b.name.localeCompare(a.name))
+                      .map((item) => (
+                        <div
+                          key={item.id}
+                          className="child"
+                          onClick={() =>
+                            handleSelectEmoji(item.name, item.icon)
+                          }
+                        >
+                          <h3>{item.icon}</h3>
+                          <p className="fs-1">{item.name}</p>
+                        </div>
+                      ))
                   )}
                 </div>
               </div>
@@ -198,6 +210,7 @@ const IncomeModal = ({ onClose, handleOpenCategory }) => {
                 type="submit"
                 aria-label="add Category"
                 className="button fs-1"
+                onClick={handleSubmit}
               >
                 Add
               </button>
