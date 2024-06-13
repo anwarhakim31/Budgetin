@@ -1,27 +1,31 @@
 import React, { useEffect, useRef, useState } from "react";
-
+import Modal2 from "../../elements/Modal2";
 import { ChevronUp, Plus, SearchIcon, X } from "lucide-react";
 import { ChevronDown } from "lucide-react";
-import Modal2 from "../../elements/Modal2";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  addExpense,
   addIncome,
   selectedDataBudget,
   selectedDataCategory,
 } from "../../../redux/slices/slice";
-import { useUsername } from "../../../hooks/useUsername";
-import { v4 as uuid } from "uuid";
 
-const IncomeModal = ({ onClose, handleOpenCategory }) => {
+import { v4 as uuid } from "uuid";
+import { useUsername } from "../../../hooks/useUsername";
+
+const ExpenseModal = ({ onClose }) => {
   const [isDrop, setIsDrop] = useState(false);
   const dataCategory = useSelector(selectedDataCategory);
   const [categorySearch, setCategorySearch] = useState([]);
   const [isDecription, setIsDecription] = useState("");
-  const [totalIncome, setTotalIncome] = useState(0);
+  const [totalExpense, setTotalExpense] = useState(0);
   const [isEmoji, setIsEmoji] = useState({ name: "", icon: "" });
-  const totalIncomeRef = useRef(null);
+  const totalExpenseRef = useRef(null);
   const categoryRef = useRef(null);
   const { userData } = useUsername();
+  const dataBudget = useSelector(selectedDataBudget);
+
+  console.log(dataBudget);
 
   const dispatch = useDispatch();
   const time = Date.now();
@@ -41,8 +45,8 @@ const IncomeModal = ({ onClose, handleOpenCategory }) => {
     setIsDecription(e.target.value);
   };
 
-  const handleTotalInCome = (e) => {
-    setTotalIncome(e.target.value);
+  const handleTotalExpense = (e) => {
+    setTotalExpense(e.target.value);
   };
 
   const handleSelectEmoji = (name, icon) => {
@@ -55,17 +59,17 @@ const IncomeModal = ({ onClose, handleOpenCategory }) => {
   }, [dataCategory]);
 
   const handleSubmit = () => {
-    if (totalIncome === 0) {
-      return totalIncomeRef.current.focus();
+    if (totalExpense === 0) {
+      return totalExpenseRef.current.focus();
     } else if (isEmoji.name === "") {
       return categoryRef.current.focus();
     }
 
     dispatch(
-      addIncome({
+      addExpense({
         user: userData,
         id: uuid(),
-        income: parseFloat(totalIncome),
+        expense: +totalExpense,
         category: isEmoji,
         description: isDecription,
         time: time,
@@ -77,7 +81,7 @@ const IncomeModal = ({ onClose, handleOpenCategory }) => {
   return (
     <Modal2 onClose={onClose}>
       <div className="flex-between">
-        <h3 className="fs-3 fw-semibold text-primary-700">Add Income</h3>
+        <h3 className="fs-3 fw-semibold text-primary-700">Add Expense</h3>
         <button
           className="close-modal"
           aria-label="back to section"
@@ -88,6 +92,7 @@ const IncomeModal = ({ onClose, handleOpenCategory }) => {
       </div>
       <div className="modal-content-wrapper mt-5">
         <div className="modal-content">
+          {" "}
           <div className="flex flex-col">
             <label
               htmlFor="category"
@@ -101,25 +106,25 @@ const IncomeModal = ({ onClose, handleOpenCategory }) => {
               onChange={handleChangeDecription}
               value={isDecription}
             />
-            <span className="fs-1">Enter Income Description (Opsional).</span>
+            <span className="fs-1">Enter Expense Description (Opsional).</span>
           </div>
           <div className="flex flex-col mt-2">
             <label
               htmlFor="category"
               className="fw-semibold fs-2 text-primary-900"
             >
-              Total Income
+              Total Expense
             </label>
             <input
               type="number"
               className="inputs"
-              onChange={handleTotalInCome}
-              value={totalIncome}
-              ref={totalIncomeRef}
+              onChange={handleTotalExpense}
+              value={totalExpense}
+              ref={totalExpenseRef}
               min="0"
               step="0.01"
             />
-            <span className="fs-1">Determine the amount of income</span>
+            <span className="fs-1">Determine the amount of Expense</span>
           </div>
           <div className="flex flex-col mt-2 choose">
             <label
@@ -165,14 +170,14 @@ const IncomeModal = ({ onClose, handleOpenCategory }) => {
                     className="drop-down-input"
                     onChange={handleSearchCategory}
                   />
-                  <button
+                  {/* <button
                     className="plus button"
                     aria-label="add category "
                     title="Add Category"
-                    onClick={handleOpenCategory}
+                    // onClick={handleOpenCategory}
                   >
                     <Plus height={15} width={15} />
-                  </button>
+                  </button> */}
                 </div>
                 <div className="dialog-content">
                   {dataCategory.length === 0 ? (
@@ -200,7 +205,7 @@ const IncomeModal = ({ onClose, handleOpenCategory }) => {
                 </div>
               </div>
             )}
-            <div className="button-modal-income">
+            <div className="button-modal-Expense">
               <button
                 type="button"
                 aria-label="cancel add category"
@@ -225,4 +230,4 @@ const IncomeModal = ({ onClose, handleOpenCategory }) => {
   );
 };
 
-export default IncomeModal;
+export default ExpenseModal;

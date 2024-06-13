@@ -7,11 +7,13 @@ import IncomeModal from "../fragments/mainDashboard/IncomeModal";
 import { loaddedBudget, loaddedCategory } from "../../redux/slices/slice";
 import { useUsername } from "../../hooks/useUsername";
 import { useDispatch } from "react-redux";
+import ExpenseModal from "../fragments/mainDashboard/ExpenseModal";
 
 const MainLayout = () => {
   const { pathname } = useLocation();
   const [isCategory, setIsCategory] = useState(false);
   const [isIncome, setIsIncome] = useState(false);
+  const [isExpense, setIsExpense] = useState(false);
   const { userData } = useUsername();
   const dispatch = useDispatch();
   useEffect(() => {
@@ -38,12 +40,23 @@ const MainLayout = () => {
     setIsIncome(false);
   };
 
+  const handleOpenExpense = () => {
+    setIsExpense(true);
+  };
+
+  const handleCloseExpense = () => {
+    setIsExpense(false);
+  };
+
   return (
     <main className="main h-full">
       <div className="container">
         <div className="dashboard-main">
           {pathname === "/dashboard" && (
-            <DashboardFragment handleOpenIncome={handleOpenIncome} />
+            <DashboardFragment
+              handleOpenIncome={handleOpenIncome}
+              handleOpenExpense={handleOpenExpense}
+            />
           )}
           {pathname === "/manage" && (
             <ManageFragment handleOpenCategory={handleOpenCategory} />
@@ -57,6 +70,7 @@ const MainLayout = () => {
           handleOpenCategory={handleOpenCategory}
         />
       )}
+      {isExpense && <ExpenseModal onClose={handleCloseExpense} />}
     </main>
   );
 };

@@ -8,7 +8,7 @@ import { selectedDataBudget } from "../../../redux/slices/slice";
 import { NotFoundBudget } from "../../elements/Budget/NotFoundBudget";
 import BudgetList from "../../elements/Budget/BudgetList";
 
-export const DashboardFragment = ({ handleOpenIncome }) => {
+export const DashboardFragment = ({ handleOpenIncome, handleOpenExpense }) => {
   const { usernames } = useUsername();
   const { isDark } = useDarkMode();
   const dataBudget = useSelector(selectedDataBudget);
@@ -34,7 +34,11 @@ export const DashboardFragment = ({ handleOpenIncome }) => {
                 Income <span className="ml-3">🤑</span>
               </p>
             </button>
-            <button className="pemasukan flex-center mr-3">
+            <button
+              className="pemasukan flex-center mr-3"
+              aria-label="expense"
+              onClick={handleOpenExpense}
+            >
               <Minus className="mr-1" width={20} height={20} />
               <p>
                 {" "}

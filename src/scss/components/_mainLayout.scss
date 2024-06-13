@@ -146,16 +146,17 @@
             }
             .total-budget {
               font-weight: 600;
+              color: var(--clr-accent-700);
             }
             .spent {
               font-size: 0.8rem;
               font-weight: 500;
-              color: var(--clr-primary-400);
+              color: var(--clr-accent-600);
             }
             .remain {
               font-size: 0.8rem;
               font-weight: 500;
-              color: var(--clr-primary-400);
+              color: var(--clr-accent-500);
             }
           }
 

@@ -47,6 +47,28 @@ const BudgetinSlice = createSlice({
       state.transaction.push({ ...action.payload, type: "income" });
       saveBudgetStorage(state.budget);
     },
+    addExpense: (state, action) => {
+      const { category, expense } = action.payload;
+
+      const selectIndex = state.budget.findIndex(
+        (item) => item.category.name === category.name
+      );
+
+      if (selectIndex !== -1) {
+        console.log(state.budget[selectIndex].expense);
+
+        if (state.budget[selectIndex].expense) {
+          state.budget[selectIndex].expense += expense;
+        } else {
+          state.budget[selectIndex] = {
+            ...state.budget[selectIndex],
+            expense,
+          };
+          state.transaction.push({ ...action.payload, type: "expense" });
+          saveBudgetStorage(state.budget);
+        }
+      }
+    },
   },
 });
 
@@ -56,6 +78,7 @@ export const {
   loaddedCategory,
   addIncome,
   loaddedBudget,
+  addExpense,
 } = BudgetinSlice.actions;
 export default BudgetinSlice.reducer;
 
