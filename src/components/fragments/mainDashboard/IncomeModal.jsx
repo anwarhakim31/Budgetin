@@ -66,6 +66,7 @@ const IncomeModal = ({ onClose, handleOpenCategory }) => {
         user: userData,
         id: uuid(),
         income: parseFloat(totalIncome),
+        expense: 0,
         category: isEmoji,
         description: isDecription,
         time: time,

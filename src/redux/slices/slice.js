@@ -33,7 +33,7 @@ const BudgetinSlice = createSlice({
       SaveCategoryStorage(state.category);
     },
     addIncome: (state, action) => {
-      const { user, id, income, category } = action.payload;
+      const { user, id, income, category, expense } = action.payload;
 
       const selectIndex = state.budget.findIndex(
         (item) => item.category.name === category.name
@@ -42,7 +42,7 @@ const BudgetinSlice = createSlice({
       if (selectIndex !== -1) {
         state.budget[selectIndex].income += income;
       } else {
-        state.budget.push({ user, id, income, category });
+        state.budget.push({ user, id, income, expense, category });
       }
       state.transaction.push({ ...action.payload, type: "income" });
       saveBudgetStorage(state.budget);
@@ -57,16 +57,10 @@ const BudgetinSlice = createSlice({
       if (selectIndex !== -1) {
         console.log(state.budget[selectIndex].expense);
 
-        if (state.budget[selectIndex].expense) {
-          state.budget[selectIndex].expense += expense;
-        } else {
-          state.budget[selectIndex] = {
-            ...state.budget[selectIndex],
-            expense,
-          };
-          state.transaction.push({ ...action.payload, type: "expense" });
-          saveBudgetStorage(state.budget);
-        }
+        state.budget[selectIndex].expense += expense;
+
+        state.transaction.push({ ...action.payload, type: "expense" });
+        saveBudgetStorage(state.budget);
       }
     },
   },
@@ -85,3 +79,13 @@ export default BudgetinSlice.reducer;
 export const selectedDataCategory = (state) => state.budgetin.category;
 export const selectedDataBudget = (state) => state.budgetin.budget;
 export const selectedDataTransaction = (state) => state.budgetin.transaction;
+export const selectedTotalIncome = (state) =>
+  state.budgetin.budget.reduce((total, item) => total + item.income, 0);
+export const selectedTotalExpense = (state) =>
+  state.budgetin.budget.reduce((total, item) => total + item.expense, 0);
+
+export const selectedEndingBalance = (state) =>
+  state.budgetin.budget.reduce(
+    (total, item) => total + (item.income - item.expense),
+    0
+  );

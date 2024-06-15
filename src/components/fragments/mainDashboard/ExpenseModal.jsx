@@ -23,9 +23,6 @@ const ExpenseModal = ({ onClose }) => {
   const totalExpenseRef = useRef(null);
   const categoryRef = useRef(null);
   const { userData } = useUsername();
-  const dataBudget = useSelector(selectedDataBudget);
-
-  console.log(dataBudget);
 
   const dispatch = useDispatch();
   const time = Date.now();

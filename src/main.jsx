@@ -35,7 +35,6 @@ const router = createBrowserRouter([
     element: <RegisterPage />,
   },
   {
-    path: "/",
     element: <HomePage />, // Use HomePage as the main layout
     children: [
       {

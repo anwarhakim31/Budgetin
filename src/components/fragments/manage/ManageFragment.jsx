@@ -33,7 +33,9 @@ export const ManageFragment = ({ handleOpenCategory }) => {
           </div>
         </div>
         {isloading ? (
-          <div className="wrapper-category-skeleton">
+          <div
+            className={`${isDark ? "bg-dark" : ""} wrapper-category-skeleton`}
+          >
             <div className="category-head-sekeleton">
               <div className="flex-center gap">
                 <div className="icon-head-skeleton skeleton"></div>

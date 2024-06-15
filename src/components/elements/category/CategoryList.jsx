@@ -17,6 +17,7 @@ const CategoryList = ({ data }) => {
       <button
         aria-label="delete category"
         onClick={() => handleDeletecategory(data.id)}
+        className="trash-button"
       >
         <Trash className="category-list-trash" />
       </button>
