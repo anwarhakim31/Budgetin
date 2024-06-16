@@ -4,10 +4,15 @@ import { useEffect, useState } from "react";
 import ManageModal from "../fragments/manage/ManageModal";
 import { ManageFragment } from "../fragments/manage/ManageFragment";
 import IncomeModal from "../fragments/mainDashboard/IncomeModal";
-import { loaddedBudget, loaddedCategory } from "../../redux/slices/slice";
+import {
+  loaddedBudget,
+  loaddedCategory,
+  loaddedTransaction,
+} from "../../redux/slices/slice";
 import { useUsername } from "../../hooks/useUsername";
 import { useDispatch } from "react-redux";
 import ExpenseModal from "../fragments/mainDashboard/ExpenseModal";
+import TransactionFragment from "../fragments/transaction/TransactionFragment";
 
 const MainLayout = () => {
   const { pathname } = useLocation();
@@ -22,6 +27,10 @@ const MainLayout = () => {
 
   useEffect(() => {
     dispatch(loaddedBudget(userData));
+  }, [userData]);
+
+  useEffect(() => {
+    dispatch(loaddedTransaction(userData));
   }, [userData]);
 
   const handleOpenCategory = () => {
@@ -61,6 +70,7 @@ const MainLayout = () => {
           {pathname === "/manage" && (
             <ManageFragment handleOpenCategory={handleOpenCategory} />
           )}
+          {pathname === "/transaction" && <TransactionFragment />}
         </div>
       </div>
       {isCategory && <ManageModal onClose={handleCloseCategory} />}

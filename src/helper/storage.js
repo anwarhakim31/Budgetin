@@ -67,3 +67,33 @@ export const loadBudgetStorage = (name) => {
     return [];
   }
 };
+
+export const SaveTransactionStorage = (data) => {
+  try {
+    const encryptData = CryptoJS.AES.encrypt(
+      JSON.stringify(data),
+      secretKey
+    ).toString();
+
+    localStorage.setItem("BTransaction", encryptData);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const loadTransactionStorage = (name) => {
+  try {
+    const EncyptedData = localStorage.getItem("BTransaction");
+
+    if (!EncyptedData) return [];
+    const byte = CryptoJS.AES.decrypt(EncyptedData, secretKey);
+
+    const decryptedData = JSON.parse(byte.toString(CryptoJS.enc.Utf8));
+
+    const byName = decryptedData.filter((data) => data.user === name);
+
+    return byName || [];
+  } catch (error) {
+    console.log(error);
+  }
+};

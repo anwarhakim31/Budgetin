@@ -7,7 +7,7 @@ const CatergoryNotFound = () => {
   return (
     <div className="category-notfound">
       <h3 className={isDark ? "text-light2" : ""}>Category Notfound.</h3>
-      <p>Please Add New Category.</p>
+      <p>Please Create New Category.</p>
     </div>
   );
 };

@@ -68,8 +68,9 @@ const IncomeModal = ({ onClose, handleOpenCategory }) => {
         income: parseFloat(totalIncome),
         expense: 0,
         category: isEmoji,
+        amount: +totalIncome,
         description: isDecription,
-        time: time,
+        date: time,
       })
     );
     onClose();
@@ -78,7 +79,10 @@ const IncomeModal = ({ onClose, handleOpenCategory }) => {
   return (
     <Modal2 onClose={onClose}>
       <div className="flex-between">
-        <h3 className="fs-3 fw-semibold text-primary-700">Add Income</h3>
+        <h3 className="fs-3 fw-semibold text-primary-700">
+          Create a new <span className="text-accent-500">income</span>{" "}
+          transaction
+        </h3>
         <button
           className="close-modal"
           aria-label="back to section"
@@ -102,14 +106,14 @@ const IncomeModal = ({ onClose, handleOpenCategory }) => {
               onChange={handleChangeDecription}
               value={isDecription}
             />
-            <span className="fs-1">Enter Income Description (Opsional).</span>
+            <span className="fs-1">Transaction Description (Opsional).</span>
           </div>
           <div className="flex flex-col mt-2">
             <label
               htmlFor="category"
               className="fw-semibold fs-2 text-primary-900"
             >
-              Total Income
+              Amount
             </label>
             <input
               type="number"
@@ -120,7 +124,7 @@ const IncomeModal = ({ onClose, handleOpenCategory }) => {
               min="0"
               step="0.01"
             />
-            <span className="fs-1">Determine the amount of income</span>
+            <span className="fs-1">Transaction amount (Required)</span>
           </div>
           <div className="flex flex-col mt-2 choose">
             <label

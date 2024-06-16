@@ -6,8 +6,8 @@ import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import { v4 as uuid } from "uuid";
 import { useDarkMode } from "../../../context/Darkmode";
-import { useDispatch } from "react-redux";
-import { addCategory } from "../../../redux/slices/slice";
+import { useDispatch, useSelector } from "react-redux";
+import { addCategory, selectedDataCategory } from "../../../redux/slices/slice";
 import { toast } from "react-toastify";
 import { useUsername } from "../../../hooks/useUsername";
 
@@ -22,6 +22,7 @@ const ManageModal = ({ onClose }) => {
   const emojiRef = useRef(null);
   const dispatch = useDispatch();
   const { userData } = useUsername();
+  const dataCategory = useSelector(selectedDataCategory);
 
   const handleOpenPicker = () => {
     setIsPicker(true);
@@ -45,6 +46,8 @@ const ManageModal = ({ onClose }) => {
     setIsName(e.target.value);
   };
 
+  console.log(dataCategory);
+
   const handleAddCategory = () => {
     if (isName === "") {
       inputRef.current.focus();
@@ -57,23 +60,33 @@ const ManageModal = ({ onClose }) => {
     const notify = () =>
       toast.promise(
         new Promise((resolve, reject) => {
-          setTimeout(() => {
-            dispatch(
-              addCategory({
-                id: uuid(),
-                name: isName.toLowerCase().trim(),
-                icon: isEmoji,
-                user: userData,
-              })
-            );
-            onClose();
-            resolve("Success!");
-          }, 2000); // 2 seconds delay
+          const isExist = dataCategory.some(
+            (data) => data.name === isName.toLowerCase().trim()
+          );
+
+          if (isExist) {
+            setTimeout(() => {
+              reject("failed!");
+            }, 1000);
+          } else {
+            setTimeout(() => {
+              dispatch(
+                addCategory({
+                  id: uuid(),
+                  name: isName.toLowerCase().trim(),
+                  icon: isEmoji,
+                  user: userData,
+                })
+              );
+              onClose();
+              resolve("Success!");
+            }, 1000);
+          }
         }),
         {
           pending: "Processing Add Category...",
-          success: "Category has been Created 👌",
-          error: "Action failed 🤯",
+          success: "Category Has Been Created 👌",
+          error: "Same Category Has Been Created !",
         }
       );
 

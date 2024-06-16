@@ -16,7 +16,7 @@
       @include flex(space-between, center, null);
       width: 100%;
       gap: 0.5rem;
-      padding-top: 1rem;
+      padding-top: 1.5rem;
       padding-bottom: 2rem;
       flex-wrap: wrap;
       border-bottom: 1px solid var(--clr-primary-300);
@@ -37,6 +37,14 @@
         &:hover {
           outline: var(--clr-neutral-900) solid 2px;
           background: var(--clr-accent-600);
+        }
+
+        &:disabled {
+          cursor: not-allowed;
+
+          &:hover {
+            background-color: var(--clr-primary-800);
+          }
         }
 
         @include break-down(xl) {
@@ -65,6 +73,182 @@
       }
     }
 
+    .wrapper-navigation {
+      margin-top: 1.5rem;
+
+      .left {
+        padding-block: 0.25rem;
+        padding-inline: 1rem;
+        border-radius: 1rem;
+        border: 1px solid var(--clr-primary-400);
+        border-style: dashed;
+
+        @include flex(center, center, null);
+        gap: 0.5rem;
+        cursor: pointer;
+        .icon-left {
+          border-radius: 100%;
+          width: 15px;
+          height: 15px;
+          display: grid;
+          place-items: center;
+
+          border: 1px solid var(--clr-neutral-900);
+        }
+      }
+
+      .popup-navigation {
+        position: absolute;
+        left: 1px;
+        bottom: -75px;
+
+        width: 120px;
+        height: 75px;
+        margin-top: 0.5rem;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        background: var(--clr-neutral-100);
+        box-shadow: 0 1px 8px var(--clr-primary-200);
+        z-index: 2;
+        .select {
+          @include flex(start, center, null);
+          padding: 0.25rem;
+
+          gap: 0.5rem;
+          font-size: 0.875rem;
+          &:hover {
+            background: var(--clr-primary-200);
+            border-radius: 0.5rem;
+          }
+          label {
+            cursor: pointer;
+          }
+          input {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    .wrapper-table {
+      margin-top: 0.5rem;
+      max-height: calc(100vh - 300px);
+      border-radius: 0.5rem;
+      border: 1px solid var(--clr-primary-300);
+      overflow: auto;
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+
+        th,
+        td {
+          padding: 1rem;
+          text-align: left;
+          border-bottom: 1px solid var(--clr-primary-300);
+          text-wrap: nowrap;
+        }
+        th {
+          font-size: 0.875rem;
+          font-weight: 600;
+          color: var(--clr-primary-500);
+          padding-block: 0.75rem;
+          text-transform: capitalize;
+
+          &:hover {
+            color: var(--clr-neutral-900);
+          }
+        }
+        td {
+          font-size: 0.875rem;
+          font-weight: 400;
+          padding-block: 1.5rem;
+        }
+
+        thead {
+          position: sticky;
+          top: 0;
+          background: var(--clr-neutral-100);
+          z-index: 1; /* Ensure thead is above tbody */
+          box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow for better separation */
+
+          &:hover {
+            background: rgb(236, 240, 241);
+          }
+        }
+
+        button {
+          border-radius: 0.5rem;
+          border: 1px solid var(--clr-primary-200);
+          background: white;
+          width: 40px;
+          height: 40px;
+          display: grid;
+          place-items: center;
+          cursor: pointer;
+          svg {
+            stroke: #ef4d4d;
+          }
+        }
+        .notFound {
+          text-align: center;
+          width: 100%;
+        }
+        .description {
+          max-width: 250px;
+          min-width: 100px;
+          text-wrap: wrap;
+          word-break: break-all;
+        }
+        .expense {
+          background: #fff1f3;
+          color: var(--clr-accent-600);
+          font-weight: 500;
+
+          border-radius: 1rem;
+          min-width: 100px;
+          display: grid;
+          height: 40px;
+          place-items: center;
+          margin: auto;
+        }
+        .amount {
+          background: var(--clr-primary-100);
+          margin: auto;
+          font-weight: 500;
+          display: grid;
+          place-items: center;
+          border-radius: 1rem;
+          min-width: 100%;
+          height: 40px;
+          min-width: 150px;
+        }
+        .income {
+          background: #edfcf2;
+          color: var(--clr-accent-500);
+          font-weight: 500;
+          border-radius: 1rem;
+          min-width: 100px;
+          display: grid;
+          place-items: center;
+
+          height: 40px;
+        }
+        .date {
+          min-width: 50px;
+          max-width: 15px;
+        }
+
+        tbody {
+          tr {
+            &:hover {
+              background: rgb(236, 240, 241);
+            }
+          }
+        }
+      }
+    }
+
     .wrapper-dashboard {
       margin-bottom: 2rem;
       .Overwiew {
@@ -76,7 +260,9 @@
 
       .financial-dashboard {
         display: grid;
-
+        h1 {
+          width: 200px;
+        }
         gap: 1rem;
         margin-bottom: 2rem;
         grid-auto-flow: row;
@@ -93,9 +279,6 @@
           border: 1px solid var(--clr-primary-300);
           border-radius: 0.5rem;
           // background: var(--clr-neutral-200);
-          h1 {
-            width: 150px;
-          }
 
           &.box-income {
             .box-image {
@@ -138,8 +321,6 @@
               background: #eff6fe;
               border-radius: 0.5rem;
               svg {
-                width: 80%; // Ubah proporsi svg
-                height: 80%;
                 stroke: var(--clr-accent-700);
               }
             }
@@ -151,8 +332,9 @@
 
         .box-skeleton {
           .child-box-skeleton {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
+            margin-block: 5px;
 
             border-radius: 0.5rem;
           }
@@ -163,7 +345,7 @@
           }
           .sub-skeleton {
             width: 150px;
-            height: 30px;
+            height: 25px;
             margin-top: 0.5rem;
             border-radius: 0.5rem;
           }
@@ -205,7 +387,7 @@
           padding: 1rem;
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(1fr, 1fr));
-          min-height: calc(50vh - 180px);
+          min-height: calc(100vh - 500px);
           position: relative;
           @include break-up(lg) {
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -271,14 +453,15 @@
               h3 {
                 color: var(--clr-primary-600);
                 font-weight: 500;
+                font-size: 0.9375rem;
                 @include break-down(sm) {
-                  font-size: 0.75rem;
+                  font-size: 0.875rem;
                 }
               }
               p {
                 color: var(--clr-primary-500);
-                margin-top: 0.5rem;
-                font-size: 0.9375rem;
+                margin-top: 0.25rem;
+                font-size: 0.875rem;
               }
             }
           }
@@ -382,19 +565,24 @@
           h3 {
             color: var(--clr-primary-600);
             font-weight: 500;
+            font-size: 0.9375rem;
             @include break-down(sm) {
               font-size: 0.75rem;
             }
           }
           p {
             color: var(--clr-primary-500);
-            margin-top: 0.5rem;
-            font-size: 0.9375rem;
+            margin-top: 0.25rem;
+            font-size: 0.875rem;
           }
         }
 
         .category-list {
-          grid-column: span 2 / span 2;
+          grid-column: span 4 / span 4;
+
+          @include break-up(sm) {
+            grid-column: span 2 / span 2;
+          }
           @include break-up(md) {
             grid-column: span 4 / span 4;
           }
@@ -406,23 +594,20 @@
             grid-column: span 2 / span 2;
           }
           width: 100%;
-          height: 120px;
+          overflow: hidden;
+          height: 140px;
           padding-block: 0.5rem;
           border-radius: 0.5rem;
 
           box-shadow: 0 1px 4px var(--clr-primary-500);
 
           .trash-button {
-            position: absolute;
-            top: 6px;
-            right: 6px;
-            width: 25px;
-            height: 25px;
+            width: 100%;
+
             padding: 5px;
             border: none;
-            border-radius: 100%;
-            color: var(--clr-accent-600);
-            background: var(--clr-primary-300);
+
+            margin-top: 0.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -451,9 +636,10 @@
             justify-content: center;
           }
           p {
-            margin-top: 1rem;
+            margin-top: 0.5rem;
             font-weight: 600;
             text-align: center;
+            text-transform: capitalize;
           }
         }
       }

@@ -68,8 +68,9 @@ const ExpenseModal = ({ onClose }) => {
         id: uuid(),
         expense: +totalExpense,
         category: isEmoji,
+        amount: totalExpense,
         description: isDecription,
-        time: time,
+        date: time,
       })
     );
     onClose();
@@ -78,7 +79,10 @@ const ExpenseModal = ({ onClose }) => {
   return (
     <Modal2 onClose={onClose}>
       <div className="flex-between">
-        <h3 className="fs-3 fw-semibold text-primary-700">Add Expense</h3>
+        <h3 className="fs-3 fw-semibold text-primary-700">
+          Create a new <span className="text-accent-600">expense</span>{" "}
+          transaction
+        </h3>
         <button
           className="close-modal"
           aria-label="back to section"
@@ -103,7 +107,7 @@ const ExpenseModal = ({ onClose }) => {
               onChange={handleChangeDecription}
               value={isDecription}
             />
-            <span className="fs-1">Enter Expense Description (Opsional).</span>
+            <span className="fs-1">Transaction description (Opsional).</span>
           </div>
           <div className="flex flex-col mt-2">
             <label
@@ -121,7 +125,7 @@ const ExpenseModal = ({ onClose }) => {
               min="0"
               step="0.01"
             />
-            <span className="fs-1">Determine the amount of Expense</span>
+            <span className="fs-1">Transaction amount (Required)</span>
           </div>
           <div className="flex flex-col mt-2 choose">
             <label
@@ -209,7 +213,7 @@ const ExpenseModal = ({ onClose }) => {
                 className="button bg-primary-400 fs-1"
                 onClick={onClose}
               >
-                cancel
+                Cancel
               </button>
               <button
                 type="submit"
@@ -217,7 +221,7 @@ const ExpenseModal = ({ onClose }) => {
                 className="button fs-1"
                 onClick={handleSubmit}
               >
-                Add
+                Create
               </button>
             </div>
           </div>

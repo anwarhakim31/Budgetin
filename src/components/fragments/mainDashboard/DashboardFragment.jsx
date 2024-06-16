@@ -70,6 +70,8 @@ export const DashboardFragment = ({ handleOpenIncome, handleOpenExpense }) => {
     }
   }, [totalIncome, loading]);
 
+  console.log();
+
   useEffect(() => {
     let start = null;
     const duration = 1000; // Duration of the animation in milliseconds
@@ -128,6 +130,8 @@ export const DashboardFragment = ({ handleOpenIncome, handleOpenExpense }) => {
     }
   }, [balanceEnding, loading]);
 
+  console.log(dataBudget);
+
   return (
     <>
       <div className="dashboard-overflow">
@@ -145,13 +149,13 @@ export const DashboardFragment = ({ handleOpenIncome, handleOpenExpense }) => {
               ! 👋
             </h1>
           </div>
-          <div className="flex-center gap">
+          <div className="flex-center gap2">
             <button
               className="pengeluaran flex-center"
               onClick={handleOpenIncome}
               aria-label="add income"
             >
-              <Plus className="mr-1" width={20} height={20} />
+              <Plus className="mr-1" width={10} height={10} />
               <p>
                 {" "}
                 Income <span className="ml-3">🤑</span>
@@ -161,11 +165,12 @@ export const DashboardFragment = ({ handleOpenIncome, handleOpenExpense }) => {
               className="pemasukan flex-center mr-3"
               aria-label="expense"
               onClick={handleOpenExpense}
+              disabled={totalIncome === 0}
             >
-              <Minus className="mr-1" width={20} height={20} />
+              <Minus className="mr-1" width={10} height={10} />
               <p>
                 {" "}
-                Expense <span className="mr-2">😤</span>
+                Expense <span className="ml-3">😤</span>
               </p>
             </button>
           </div>
@@ -304,9 +309,9 @@ export const DashboardFragment = ({ handleOpenIncome, handleOpenExpense }) => {
                 {dataBudget.length === 0 ? (
                   <NotFoundBudget />
                 ) : (
-                  dataBudget.map((data) => (
-                    <BudgetList key={data.id} data={data} />
-                  ))
+                  [...dataBudget]
+                    .reverse()
+                    .map((data) => <BudgetList key={data.id} data={data} />)
                 )}
               </div>
             </div>

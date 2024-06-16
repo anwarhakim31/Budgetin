@@ -16,7 +16,7 @@
 
     .sidebar-toggle {
       opacity: 0;
-      @include break-down(lg) {
+      @include break-down(xl) {
         opacity: 1;
       }
     }

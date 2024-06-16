@@ -64,7 +64,7 @@ export const ManageFragment = ({ handleOpenCategory }) => {
                   onClick={handleOpenCategory}
                 >
                   {" "}
-                  Add Category
+                  Create Category
                 </button>
               </div>
               <div className="category-content">

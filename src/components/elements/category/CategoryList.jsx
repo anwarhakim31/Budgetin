@@ -1,4 +1,4 @@
-import { Trash } from "lucide-react";
+import { Trash, Trash2 } from "lucide-react";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { deleteCategory } from "../../../redux/slices/slice";
@@ -19,7 +19,7 @@ const CategoryList = ({ data }) => {
         onClick={() => handleDeletecategory(data.id)}
         className="trash-button"
       >
-        <Trash className="category-list-trash" />
+        <Trash2 className="category-list-trash" />
       </button>
     </div>
   );

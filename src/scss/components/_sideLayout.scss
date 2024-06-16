@@ -62,7 +62,7 @@
   cursor: pointer;
   display: none;
 
-  @include break-down(lg) {
+  @include break-down(xl) {
     display: block;
   }
 }

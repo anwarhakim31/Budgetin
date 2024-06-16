@@ -20,6 +20,7 @@ import { ManageFragment } from "./components/fragments/manage/ManageFragment";
 import { DashboardFragment } from "./components/fragments/mainDashboard/DashboardFragment";
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import TransactionFragment from "./components/fragments/transaction/TransactionFragment";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: "manage",
         element: <ManageFragment />, // Manage fragment
+      },
+      {
+        path: "transaction",
+        element: <TransactionFragment />,
       },
     ],
   },

@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   SaveCategoryStorage,
+  SaveTransactionStorage,
   loadBudgetStorage,
   loadCategoryStorage,
+  loadTransactionStorage,
   saveBudgetStorage,
 } from "../../helper/storage";
 
@@ -21,6 +23,9 @@ const BudgetinSlice = createSlice({
     },
     loaddedBudget: (state, action) => {
       state.budget = loadBudgetStorage(action.payload);
+    },
+    loaddedTransaction: (state, action) => {
+      state.transaction = loadTransactionStorage(action.payload);
     },
     addCategory: (state, action) => {
       state.category.push(action.payload);
@@ -46,6 +51,7 @@ const BudgetinSlice = createSlice({
       }
       state.transaction.push({ ...action.payload, type: "income" });
       saveBudgetStorage(state.budget);
+      SaveTransactionStorage(state.transaction);
     },
     addExpense: (state, action) => {
       const { category, expense } = action.payload;
@@ -55,13 +61,42 @@ const BudgetinSlice = createSlice({
       );
 
       if (selectIndex !== -1) {
-        console.log(state.budget[selectIndex].expense);
-
         state.budget[selectIndex].expense += expense;
 
         state.transaction.push({ ...action.payload, type: "expense" });
         saveBudgetStorage(state.budget);
+        SaveTransactionStorage(state.transaction);
       }
+    },
+    deleteAll: (state, action) => {
+      const selectIndex = state.budget.findIndex(
+        (item) => item.category.name === action.payload.category.name
+      );
+
+      state.transaction = state.transaction.filter(
+        (item) =>
+          !(
+            item.date === action.payload.date &&
+            item.amount === action.payload.amount &&
+            item.category.name === action.payload.category.name
+          )
+      );
+
+      if (selectIndex !== -1) {
+        if (action.payload.type === "income") {
+          state.budget[selectIndex].income -= action.payload.amount;
+        } else {
+          state.budget[selectIndex].expense -= action.payload.amount;
+        }
+
+        if (state.budget[selectIndex].income === 0) {
+          state.budget = state.budget.filter(
+            (item) => item.category.name !== action.payload.category.name
+          );
+        }
+      }
+      saveBudgetStorage(state.budget);
+      SaveTransactionStorage(state.transaction);
     },
   },
 });
@@ -73,6 +108,8 @@ export const {
   addIncome,
   loaddedBudget,
   addExpense,
+  loaddedTransaction,
+  deleteAll,
 } = BudgetinSlice.actions;
 export default BudgetinSlice.reducer;
 
