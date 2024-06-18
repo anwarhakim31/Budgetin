@@ -15,17 +15,25 @@ import { useUsername } from "../../../hooks/useUsername";
 
 const ExpenseModal = ({ onClose }) => {
   const [isDrop, setIsDrop] = useState(false);
-  const dataCategory = useSelector(selectedDataCategory);
+
   const [categorySearch, setCategorySearch] = useState([]);
   const [isDecription, setIsDecription] = useState("");
   const [totalExpense, setTotalExpense] = useState(0);
+  const [dataCategory, setDataCategory] = useState([]);
   const [isEmoji, setIsEmoji] = useState({ name: "", icon: "" });
   const totalExpenseRef = useRef(null);
+  const dataBudget = useSelector(selectedDataBudget);
   const categoryRef = useRef(null);
   const { userData } = useUsername();
 
   const dispatch = useDispatch();
   const time = Date.now();
+
+  useEffect(() => {
+    const category = dataBudget.map((data) => data.category);
+
+    setDataCategory(category);
+  }, [dataBudget]);
 
   const handleChooseCategory = () => {
     setIsDrop(!isDrop);

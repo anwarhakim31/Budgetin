@@ -19,3 +19,21 @@
 .text-light2 {
   color: var(--clr-neutral-100) !important;
 }
+
+.hover-dark {
+  &:hover {
+    background: var(--clr-primary-800) !important;
+  }
+}
+
+.hover-light {
+  &:hover {
+    background: var(--clr-primary-100) !important;
+  }
+}
+
+.hover-dark2 {
+  &:hover {
+    background: var(--clr-primary-900) !important;
+  }
+}

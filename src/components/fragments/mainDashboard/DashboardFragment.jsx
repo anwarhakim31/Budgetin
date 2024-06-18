@@ -130,8 +130,6 @@ export const DashboardFragment = ({ handleOpenIncome, handleOpenExpense }) => {
     }
   }, [balanceEnding, loading]);
 
-  console.log(dataBudget);
-
   return (
     <>
       <div className="dashboard-overflow">

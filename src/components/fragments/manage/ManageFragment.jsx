@@ -9,14 +9,14 @@ import CategoryList from "../../elements/category/CategoryList";
 export const ManageFragment = ({ handleOpenCategory }) => {
   const { isDark } = useDarkMode();
   const dataCategory = useSelector(selectedDataCategory);
-  const [isloading, setIsloading] = useState(false);
+  const [isloading, setIsloading] = useState(true);
 
   useEffect(() => {
     setIsloading(true);
 
     const timeout = setTimeout(() => {
       setIsloading(false);
-    }, 500);
+    }, 1000);
 
     return () => clearTimeout(timeout);
   }, []);

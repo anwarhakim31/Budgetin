@@ -23,6 +23,7 @@ const ManageModal = ({ onClose }) => {
   const dispatch = useDispatch();
   const { userData } = useUsername();
   const dataCategory = useSelector(selectedDataCategory);
+  const [isPending, setIsPending] = useState(false);
 
   const handleOpenPicker = () => {
     setIsPicker(true);
@@ -46,8 +47,6 @@ const ManageModal = ({ onClose }) => {
     setIsName(e.target.value);
   };
 
-  console.log(dataCategory);
-
   const handleAddCategory = () => {
     if (isName === "") {
       inputRef.current.focus();
@@ -56,6 +55,8 @@ const ManageModal = ({ onClose }) => {
       iconRef.current.focus();
       return;
     }
+
+    setIsPending(true);
 
     const notify = () =>
       toast.promise(
@@ -79,6 +80,7 @@ const ManageModal = ({ onClose }) => {
                 })
               );
               onClose();
+              setIsPending(false);
               resolve("Success!");
             }, 1000);
           }
@@ -192,6 +194,7 @@ const ManageModal = ({ onClose }) => {
               type="submit"
               aria-label="add Category"
               className="button fs-1"
+              disabled={isPending}
             >
               Add
             </button>

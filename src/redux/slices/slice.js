@@ -77,8 +77,8 @@ const BudgetinSlice = createSlice({
         (item) =>
           !(
             item.date === action.payload.date &&
-            item.amount === action.payload.amount &&
-            item.category.name === action.payload.category.name
+            item.category.name === action.payload.category.name &&
+            item.amount === action.payload.amount
           )
       );
 
