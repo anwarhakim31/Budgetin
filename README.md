@@ -1,8 +1,43 @@
-# React + Vite
+# Budgetin. : React Vite Redux Toolkit Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a boilerplate for a React application using Vite as the build tool, Redux Toolkit for state management.
 
-Currently, two official plugins are available:
+## Prerequisites
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Before you begin, ensure you have the following installed on your machine:
+
+- Node.js: [Download and install Node.js](https://nodejs.org/)
+- npm: Node.js package manager (comes with Node.js installation)
+
+## Getting Started
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/anwarhakim31/Budgetin.git
+   ```
+
+2. Navigate to the project directory:
+
+   ```bash
+   cd Budgetin
+   
+   ```
+
+3. Install dependencies
+
+   ```bash
+   npm install
+   ```
+
+## Development
+
+1. To start the development server, run:
+
+   ```bash
+   npm run dev
+   ```
+
+## Deployment
+
+Deploy the `dist` directory to your hosting platform of choice.
