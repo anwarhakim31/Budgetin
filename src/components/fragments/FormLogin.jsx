@@ -15,6 +15,7 @@ const FormLogin = () => {
   const [error, setError] = useState({ username: "", noMatch: "" });
   const navigate = useNavigate();
   const { isDark } = useDarkMode();
+  const [isPending, setIsPending] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -28,17 +29,16 @@ const FormLogin = () => {
   const handleLoginSubmit = (e) => {
     e.preventDefault();
 
-    const usernameError = LoginValidate("username", login.username);
-
-    setError((prevState) => ({ ...prevState, username: usernameError }));
-
     getUser((data) => {
       const isMatch = data.data.find(
         (user) => user.username === login.username
       );
 
+      const usernameError = LoginValidate("username", login.username);
+
+      setError((prevState) => ({ ...prevState, username: usernameError }));
+
       if (!usernameError) {
-        console.log(isMatch);
         if (isMatch) {
           setError((prevState) => ({ ...prevState, noMatch: false }));
           localStorage.setItem("username", isMatch.username);
@@ -104,7 +104,7 @@ const FormLogin = () => {
       >
         or
       </p>
-      <form onSubmit={handleLoginSubmit} className="">
+      <form className="">
         <InputForm
           name={"Username"}
           id={"username"}
@@ -123,7 +123,12 @@ const FormLogin = () => {
           >
             Username is Wrong
           </small>
-          <button type="submit" className="button mt-2  w-full ">
+          <button
+            type="submit"
+            className="button mt-2  w-full "
+            onClick={handleLoginSubmit}
+            disabled={isPending}
+          >
             Login
           </button>
         </div>

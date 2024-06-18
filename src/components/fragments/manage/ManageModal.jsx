@@ -66,28 +66,23 @@ const ManageModal = ({ onClose }) => {
           );
 
           if (isExist) {
-            setTimeout(() => {
-              reject("failed!");
-            }, 1000);
+            reject("failed!");
+            setIsPending(false);
           } else {
-            setTimeout(() => {
-              dispatch(
-                addCategory({
-                  id: uuid(),
-                  name: isName.toLowerCase().trim(),
-                  icon: isEmoji,
-                  user: userData,
-                })
-              );
-              onClose();
-              setIsPending(false);
-              resolve("Success!");
-            }, 1000);
+            dispatch(
+              addCategory({
+                id: uuid(),
+                name: isName.toLowerCase().trim(),
+                icon: isEmoji,
+                user: userData,
+              })
+            );
+            onClose();
+            setIsPending(false);
+            resolve();
           }
         }),
         {
-          pending: "Processing Add Category...",
-          success: "Category Has Been Created 👌",
           error: "Same Category Has Been Created !",
         }
       );

@@ -13,6 +13,7 @@ const FormRegister = () => {
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
   const [isEye, setIsEye] = useState(false);
+  const [isPending, setIsPending] = useState(false);
 
   const handleSeePass = () => {
     setIsEye(!isEye);
@@ -68,8 +69,10 @@ const FormRegister = () => {
     setError({ username: usernameError, password: passwordError });
 
     if (!usernameError && !passwordError) {
+      setIsPending(true);
       await postUser(register);
       const timeout = setTimeout(() => {
+        setIsPending(false);
         navigate("/login");
       }, 500);
       return () => clearTimeout(timeout);
@@ -99,7 +102,7 @@ const FormRegister = () => {
         isEye={isEye}
       />
 
-      <button type="submit" className="button mt-5 w-full ">
+      <button type="submit" className="button mt-5 w-full" disabled={isPending}>
         Register
       </button>
     </form>
