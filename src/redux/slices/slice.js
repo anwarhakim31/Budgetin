@@ -74,12 +74,7 @@ const BudgetinSlice = createSlice({
       );
 
       state.transaction = state.transaction.filter(
-        (item) =>
-          !(
-            item.date === action.payload.date &&
-            item.category.name === action.payload.category.name &&
-            item.amount === action.payload.amount
-          )
+        (item) => item.date !== action.payload.date
       );
 
       if (selectIndex !== -1) {

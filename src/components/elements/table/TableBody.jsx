@@ -66,16 +66,15 @@ const TableBody = ({
                 </div>
               </td>
             )}
-            {thead && (
-              <td>
-                <button
-                  onClick={() => handleDeleteTransaction(dataTransaction[i])}
-                  aria-label="delete transaction"
-                >
-                  <Trash2 width={20} height={20} />
-                </button>
-              </td>
-            )}
+
+            <td>
+              <button
+                onClick={() => handleDeleteTransaction(item)}
+                aria-label="delete transaction"
+              >
+                <Trash2 width={20} height={20} />
+              </button>
+            </td>
           </tr>
         ))
       )}

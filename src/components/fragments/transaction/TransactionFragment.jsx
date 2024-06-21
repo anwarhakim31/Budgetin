@@ -50,17 +50,19 @@ const TransactionFragment = () => {
   const tableHeaders = Object.keys(isThead).filter((key) => isThead[key]);
 
   useEffect(() => {
-    let active = dataTransaction.map((data) => {
-      const filteredData = {};
+    // let active = dataTransaction.map((data) => {
+    //   const filteredData = {};
 
-      tableHeaders.forEach((header) => {
-        if (data.hasOwnProperty(header)) {
-          filteredData[header] = data[header];
-        }
-      });
+    //   tableHeaders.forEach((header) => {
+    //     if (data.hasOwnProperty(header)) {
+    //       filteredData[header] = data[header];
+    //     }
+    //   });
 
-      return filteredData;
-    });
+    //   return filteredData;
+    // });
+
+    let active = [...dataTransaction];
 
     if (selectType) {
       active = active.filter((data) => data.type === selectType);
@@ -89,6 +91,8 @@ const TransactionFragment = () => {
 
   useEffect(() => {
     if (isDelete) {
+      console.log(selectDeleteItem);
+
       dispatch(deleteAll(selectDeleteItem));
     }
   }, [isDelete, selectDeleteItem]);
@@ -231,6 +235,7 @@ const TransactionFragment = () => {
 
     return () => clearTimeout(timeOut);
   }, []);
+
   return (
     <>
       <div className="dashboard-overflow">
@@ -346,27 +351,29 @@ const TransactionFragment = () => {
                   ref={refView}
                   role="dialog"
                 >
-                  {Object.keys(isThead).map((key) => (
-                    <div key={key} className="flex-between relative">
-                      <label htmlFor={key}>
-                        {key.charAt(0).toUpperCase() + key.slice(1)}
-                      </label>
-                      <input
-                        type="checkbox"
-                        id={key}
-                        name={key}
-                        checked={isThead[key]}
-                        onChange={handleViewChange}
-                      />
-                      <div className="checkIcon">
-                        {isThead[key] ? (
-                          <CircleCheck width={15} height={15} />
-                        ) : (
-                          <Circle width={15} height={15} />
-                        )}
+                  {Object.keys(isThead).map((key) => {
+                    return (
+                      <div key={key} className="flex-between relative">
+                        <label htmlFor={key}>
+                          {key.charAt(0).toUpperCase() + key.slice(1)}
+                        </label>
+                        <input
+                          type="checkbox"
+                          id={key}
+                          name={key}
+                          checked={isThead[key]}
+                          onChange={handleViewChange}
+                        />
+                        <div className="checkIcon">
+                          {isThead[key] ? (
+                            <CircleCheck width={15} height={15} />
+                          ) : (
+                            <Circle width={15} height={15} />
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               )}
             </div>
